@@ -1,11 +1,12 @@
 import {
   Button,
-  createMuiTheme,
+  createTheme,
   Tab,
   Tabs,
   TextField,
   ThemeProvider,
 } from "@material-ui/core";
+
 import "./Search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ const Search = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
 
-  const darkTheme = createMuiTheme({
+  const darkTheme = createTheme({
     palette: {
       type: "dark",
       primary: {
@@ -32,9 +33,7 @@ const Search = () => {
   const fetchSearch = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
-          process.env.REACT_APP_API_KEY
-        }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=f17c473c09c73abf99802b4f78554dd3&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
